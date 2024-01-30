@@ -30,7 +30,7 @@ export function SignUp() {
     register,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm()
+  } = useForm<SignUpForm>()
 
   async function handleSignUp(data: SignUpForm) {
     try {
@@ -87,8 +87,12 @@ export function SignUp() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email">Seu nome</Label>
-              <Input id="name" type="text" {...register('name')} />
+              <Label htmlFor="managerName">Seu nome</Label>
+              <Input
+                id="managerName"
+                type="text"
+                {...register('managerName')}
+              />
             </div>
 
             <div className="space-y-2">
