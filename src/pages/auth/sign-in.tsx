@@ -1,9 +1,11 @@
+import { useMutation } from '@tanstack/react-query'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
+import { signIn } from '@/api/sign-in'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -27,13 +29,37 @@ export function SignIn() {
     formState: { isSubmitting },
   } = useForm<SignInForm>()
 
+  /**
+    1) React Query facilitates communication between frontend and backend.
+
+    It allows low-level customization of several aspects in our request: retry, network mode (in case the user is offline), among others.
+
+    2) useMutation is used when a mutation is needed.
+
+    With useMutation, several informations about the request are easily acessible: submittedAt, status, isPending, isError, failureCount, etc.
+
+    3) Mutation is every action that is not a listing action (or that returns something).
+
+    - Actions using POST, PUT ou DELETE are a mutation.
+    
+    - Actions using GET are a query.
+
+    4) mutateAsync is the function used to fire the function defined in "mutationFn" (in this case, SignIn).
+
+    Renaming mutateAsync during import might be interesting, since it's possible to have several mutations in the same file.
+ */
+  const { mutateAsync: authenticate } = useMutation({
+    mutationFn: signIn,
+  })
+
   async function handleSignIn(data: SignInForm) {
     try {
       console.log(data)
 
       // throw new Error() // Forces an error, leading to the 'catch' block.
 
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      // A url will be generated in the backend's console log. Open it and check for the "auth" value in cookies.
+      await authenticate({ email: data.email })
 
       toast.success('Enviamos um link de autenticação para seu e-mail.', {
         description: 'Check your inbox!',
