@@ -1,5 +1,9 @@
 # React + TypeScript + Vite
 
+-> IMPORTANTE!
+
+Para acessar a dashboard, é necessário estar autenticado com o uso do magic link fornecido no console, após realizar o sign-in com o email definido no banco de dados (sfarias.dev@gmail.com).
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

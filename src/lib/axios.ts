@@ -2,4 +2,7 @@ import axios from 'axios'
 
 import { env } from '@/env'
 
-export const api = axios.create({ baseURL: env.VITE_API_URL })
+export const api = axios.create({
+  baseURL: env.VITE_API_URL,
+  withCredentials: true, // enables automatic sending of frontend cookies to the backend.
+})
