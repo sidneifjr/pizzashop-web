@@ -1,3 +1,4 @@
+// A intenção deste arquivo é definir manualmente as tipagens de nossas requisições; tal tarefa é feita de forma automática por ferramentas como TRPC ou GraphQL.
 /**
  * Each request gets one file.
  */
